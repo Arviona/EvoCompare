@@ -1,0 +1,165 @@
+
+Write me a backlog for the product comparison functionality of the online store site
+
+===
+
+Ability to compare up to 4 products side by side on the same page.
+Product specifications and features displayed in a tabular format for easy comparison.
+Option to sort products based on customer ratings, price, and brand.
+Highlighting the differences between the compared products for quick reference.
+Option to remove products from comparison list.
+Responsive design for optimal viewing on desktop and mobile devices.
+Integration with the product page to allow customers to add items to comparison directly from the product page.
+Clear call-to-action to purchase the selected product or return to the product page for more information.
+Option to share the comparison page with friends and family via social media or email.
+User-friendly interface with intuitive navigation to make the comparison process seamless and hassle-free.
+
+===
+
+Перевод
+
+1. Возможность сравнения до 4 продуктов на одной странице.
+2. Характеристики и особенности продукта отображаются в табличном формате для удобства сравнения.
+3. Возможность сортировки продуктов на основе оценок покупателей, цены и бренда.
+4. Подсветка различий между сравниваемыми продуктами для быстрого сравнения.
+5. Возможность удаления продуктов из списка сравнения.
+6. Отзывчивый дизайн для оптимального просмотра на настольных и мобильных устройствах.
+7. Интеграция со страницей товара, позволяющая покупателям добавлять товары для сравнения прямо со страницы товара.
+9. Четкий призыв к действию - купить выбранный товар или вернуться на страницу товара для получения дополнительной информации.
+10. Возможность поделиться страницей сравнения с друзьями и близкими через социальные сети или по электронной почте.
+11. Удобный интерфейс с интуитивно понятной навигацией, чтобы сделать процесс сравнения легким и необременительным.
+
+===
+
+Ниже - окончательное Техническое задание на функционал сравнения товаров на сайте, написанное но основе твоего бэклога. Напиши список названий JS функций или методов, которые потребуются для реализации этого Технического задания.
+
+
+
+Возможность сравнения до 5 товаров на отдельной Странице сравнения.
+На этой странице характеристики продукта отображаются в табличном формате для удобства сравнения.
+Есть возможность удаления товаров из таблицы сравнения на отдельной Странице сравнения.
+
+Максимальное кол-во товаров ограничивается программно, в случае попытки превышения кол-ва выдается предупреждение.
+Список ID товаров, выбранных для сравнения, хранится в куках с именем "compare_list".
+Характеристики и особенности товара отображаются в табличном формате для удобства сравнения.
+
+Добавление товаров для сравнения:
+Интеграция со Страницей товара, позволяющая покупателям добавлять товары для сравнения прямо со Страницы товара.
+Интеграция со страницей Каталога товаров, позволяющая покупателям добавлять товары для сравнения прямо со страницы Каталог товаров.
+
+Удаление товаров из сравнения:
+Интеграция со Страницей товара, позволяющая покупателям удалять товары для сравнения прямо со Страницы товара.
+Интеграция со страницей Каталога товаров, позволяющая покупателям удалять товары для сравнения прямо со страницы Каталог товаров.
+
+Кнопка добавления и удаления товаров в сревнении:
+Добавление товаров к сравнению производится кликом на кнопку "Сравнить".
+Если товар уже есть в таблице сравнения, то надпись меняется на "Удалить из сравнения".
+При нажатии на кнопку с надписью "Удалить из сравнения" товар удаляется из сравнения.
+
+В таблице на отдельной Странице сравнения для удаления товара из сравнения есть кнопка "Удалить из сравнения"  в виде крестика на каждой строке товара.
+При нажатии на этот крестик товар удаляетяс из списка в куках "compare_list", а также сразу же удаляется эта строка товара из таблицы.
+
+Наглядное выделение товаров, выбранных для сравнения, делается при помощи класса "in_compare", который добавляется к HTML-тегу кнопки добавления и удаления товаров.
+
+===
+
+Below is the final Terms of Reference for the product comparison functionality on the site, written based on your backlog. Write a list of JS function names or methods you will need to implement this ToR.
+
+
+
+Ability to compare up to 5 products on a separate Comparison Page.
+This page displays product characteristics in a tabular format for easy comparison.
+It is possible to remove products from the comparison table on a separate Comparison Page.
+
+The maximum quantity of the goods is limited programmatically, in case of the attempt to exceed the quantity the warning will be given out.
+The list of IDs of the goods selected for comparison is stored in a cookie named "compare_list".
+Characteristics and features of the goods are displayed in a table format for ease of comparison.
+
+Adding products for comparison:
+Integration with the Product Page, allowing customers to add products for comparison directly from the Product Page.
+Product Catalog Page Integration, allowing shoppers to add items for comparison directly from the Product Catalog Page.
+
+Remove products from comparison page:
+Integration with Product Page, allowing shoppers to remove items for comparison directly from the Product Page.
+Product Catalog Page Integration, allowing customers to remove products for comparison directly from the Product Catalog page.
+
+A button to add and remove products in comparison:
+Add items to comparison by clicking on the "Compare" button.
+If a product is in comparison table the label will change to "Remove from comparison".
+If you click "Remove from Comparison", the product will be removed from comparison.
+
+In the table on a separate Comparison Page, there is a "Remove from Comparison" button as a cross on each product line to remove the item from the comparison.
+When you click on this cross, the product is removed from the list in the "compare_list" cookie, as well as immediately removing this product line from the table.
+
+The goods selected for comparison are highlighted visually using the class "in_compare", which is added to the HTML tag of the button to add and delete goods.
+
+===
+
+addToCompareList(productId) - to add a product to the comparison list stored in a cookie.
+removeFromCompareList(productId) - to remove a product from the comparison list stored in a cookie.
+updateCompareListCookie() - to update the comparison list stored in the cookie after adding or removing a product.
+getCompareList() - to retrieve the comparison list from the cookie.
+renderComparisonTable() - to render the comparison table with product specifications and features.
+updateCompareButtonLabel(productId) - to update the label on the "Compare" button to "Remove from Comparison" or vice versa based on the product's presence in the comparison list.
+showCompareListLimitWarning() - to show a warning if the customer tries to add more than 5 products to the comparison list.
+toggleProductInCompareClass(productId) - to visually highlight a product in the comparison list by adding or removing the "in_compare" class from its HTML tag.
+
+===
+
+Напиши код JS функции addToCompareList(productId) с учетом того, что productId хранится в data-id тега кнопки CompareButton, также у кнопки есть data-action="addToCompareList", тегом кнопки является span
+
+Write the JS code of the addToCompareList(productId) function given that the productId is stored in the data-id of the CompareButton tag, also the button has data-action="addToCompareList", the button tag is span
+
+===
+
+Отлично! напиши теперь код функции getCompareList()  // Get the current comparison list from the cookie из твоего кода выше
+
+===
+
+Отлично!  А теперь напиши код функции updateCompareListCookie(compareList)
+
+===
+
+
+Great!  Now write the function code  removeFromCompareList(productId) - to remove a product from the comparison list stored in a cookie.
+
+
+===
+
+Great!  Now write the function code updateCompareButtonLabel(productId) - to update the label on the "Compare" button to "Remove from Comparison" or vice versa based on the product's presence in the comparison list.
+
+===
+
+Great!  Now write the function code showCompareListLimitWarning() - to show a warning if the customer tries to add more than 5 products to the comparison list.
+
+===
+
+Great!  Now write the function code toggleProductInCompareClass(productId) - to visually highlight a product in the comparison list by adding or removing the "in_compare" class from its HTML tag.
+
+===
+
+Great!  Now write the function code so that it runs a PHP script via fetch to the compare-list URL and inserts the HTML code from the PHP script into the tag with id="compare-list-table". The function is called renderComparisonTable() - to render the comparison table with product specifications and features.
+
+
+Более подробно
+
+Отлично!  А теперь перепиши код функции renderComparisonTable() так, чтобы она через fetch запускала PHP скрипт по УРЛу "/compare-list", передавала этому скрипту список id товаров, и вставляла в тег с id="compare-list-table" полученный от этого PHP скрипта HTML код. Функция называется renderComparisonTable()
+
+Great!  Now rewrite the code of the renderComparisonTable() function so that it runs a PHP script via fetch to the "/compare-list" URL, passes the list of product id to this script, and inserts the HTML code from this PHP script into the tag with id="compare-list-table". The function is called renderComparisonTable()
+
+===
+
+Отлично!  А теперь напиши код PHP скрипта, который запускается по УРЛу "/compare-list", получает от JS-функции renderComparisonTable() список id товаров, и преобразует его в строку со списком id товаров через запятую.
+
+===
+
+В функции updateCompareListCookie(compareList) (её код есть выше в нашем диалоге) есть баг.
+
+Когда кука compare_list уже установлена, но является пустой строкой, при добавлении в строку какого-либо значения, в самом начале этой строки появляется запятая.
+
+Это выглядит примерно так",43". Исправь, чтобы этой лишней запятой в начале строки не было.
+
+===
+
+Вот код, реализующий функционал сравнения товаров для интернет-магазина. Функция setCompareButtonsListeners()
+
