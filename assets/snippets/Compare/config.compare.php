@@ -21,9 +21,9 @@ $params = [
             [+dl.wrap+]
         </div>',
     'tpl' => 'tovar',
-    'tvList' => 'new,hit,nalich,vid,nazv,tol,dlina,shir,color,material,tekstura,plotn,razm,q_complect,price',
+    'tvList' => 'dlina,shir,color,material,tekstura,plotn,price',
     'sortBy' => 'menuindex',
     'sortOrder' => 'DESC',
-    'prepare' => 'Tovar_picture,Tovar_labels,Tovar_data',
+    'prepare' => '',
     'debug' => 0,
 ];
