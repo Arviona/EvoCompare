@@ -7,14 +7,11 @@ $compareMaxCount = 5;
 $comparePhrases = 1;
 
 // Фразы для кнопки сравнения. Актуальны, только если предыдущее установлено в 1.
-$comparePhrase = [
-    'Add' => 'Добавить к сравнению',
-    'Remove' = 'Удалить из сравнения',
-];
+$comparePhraseAdd = 'Сравнить';
+$comparePhraseRemove = 'Убрать из сравнения';
 
 // Класс активности
-$compareActiveClass = 'compare_active';
-
+$compareActiveClass = 'active';
 
 // Здесь задайте остальные параметры по правилам ДокЛистера, применимы все параметры ДокЛистера
 // (!) Список ниже - это пример, вы можете одни параметры удалить, вторые помеянть, а третьи добавить
@@ -24,9 +21,9 @@ $params = [
             [+dl.wrap+]
         </div>',
     'tpl' => 'tovar',
-    'tvList' => 'new,hit,dlina,shir,color,material,tekstura,price',
+    'tvList' => 'new,hit,nalich,vid,nazv,tol,dlina,shir,color,material,tekstura,plotn,razm,q_complect,price',
     'sortBy' => 'menuindex',
     'sortOrder' => 'DESC',
-    'prepare' => '',
+    'prepare' => 'Tovar_picture,Tovar_labels,Tovar_data',
     'debug' => 0,
 ];
