@@ -1,5 +1,7 @@
 ## Что входит
-В дополнение EvoCompare входят файлы `assets/snippets/Compare/compare.js`, `assets/snippets/Compare/plugin.compare.php` и `assets/snippets/Compare/plugin.compare.php`, а также плагин Compare для админки. Если ставите архивом - всё должно создаться и настроиться само.
+В дополнение EvoCompare входят файлы `assets/snippets/Compare/compare.js`, `assets/snippets/Compare/plugin.compare.php` и `assets/snippets/Compare/plugin.compare.php`, а также плагин Compare для админки.
+
+Устанавливайте архивом через Экстрас - всё должно создаться и настроиться само. Делалось и тестировалось для 1.4, про работоспособность на 3.х не знаю ничего.
 
 ### 1. Параметры и шаблоны
 
