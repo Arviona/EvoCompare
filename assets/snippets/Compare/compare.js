@@ -18,7 +18,7 @@ function afterFilterComplete() {
 function addToCompareList(productId) {
     // Get the current comparison list from the cookie
     const compareList = getCompareList();
-
+    
     // Check if the product is already in the comparison list
     if (!compareList.includes(productId)) {
         // Check if the comparison list has reached its limit
@@ -26,14 +26,14 @@ function addToCompareList(productId) {
             showCompareListLimitWarning();
             return;
         }
-
+        
         // Add the product to the comparison list
         compareList.push(productId);
         updateCompareListCookie(compareList);
-
+        
         // Update the button text and class
         updateCompareButtonState(productId);
-
+        
         renderCompareCount();
     }
 }
@@ -41,20 +41,20 @@ function addToCompareList(productId) {
 function removeFromCompareList(productId) {
     // Get the current comparison list from the cookie
     const compareList = getCompareList();
-
+    
     // Check if the product is in the comparison list
     if (compareList.includes(productId)) {
         // Remove the product from the comparison list
         const index = compareList.indexOf(productId);
         compareList.splice(index, 1);
         updateCompareListCookie(compareList);
-
+        
         // Update the button text and class
         updateCompareButtonState(productId);
-
+        
         // Update comparison table
         renderCompareTable();
-
+        
         renderCompareCount();
     }
 }
@@ -66,7 +66,7 @@ function setAllCompareButtonsListeners() {
     if (compareButtons.length == 0) {
         return;
     }
-
+    
     compareButtons.forEach(button => {
         button.addEventListener("click", function() {
             const productId = this.dataset.id;
@@ -83,20 +83,20 @@ function setAllCompareButtonsListeners() {
 
 function setAllCompareButtonsState() {
     // Set class and text to the each compare button
-
+    
     // Get the current comparison list from the cookie
     const compareList = getCompareList();
     if (compareList.length == 0) {
         return;
     }
-
+    
     compareList.forEach(productId => {
-        const button = document.querySelector(`[data-id='${productId}']`);
-
-        if (button) {
-            button.innerText = "Удалить из сравнения";
-            button.dataset.action = "removeFromCompareList";
-            button.classList.add("compareButton_active");
+        const compareButton = document.querySelector(`[data-id='${productId}']`);
+        
+        if (compareButton) {
+            compareButton.innerText = (comparePhrases) ? comparePhraseRemove : compareButton.innerText;
+            compareButton.dataset.action = "removeFromCompareList";
+            compareButton.classList.add(compareActiveClass);
         }
     });
 }
@@ -107,22 +107,22 @@ function updateCompareButtonState(productId) {
     if (!compareButton) {
         return;
     }
-
+    
     // Get the current comparison list from the cookie
     const compareList = getCompareList();
-
+    
     // Check if the product is in the comparison list
     if (compareList.includes(productId)) {
-        compareButton.innerText = "Удалить из сравнения";
+        compareButton.innerText = (comparePhrases) ? comparePhraseRemove : compareButton.innerText;
         compareButton.dataset.action = "removeFromCompareList";
-        compareButton.classList.add("compareButton_active");
-
+        compareButton.classList.add(compareActiveClass);
+        
         compareButton.addEventListener("click", function() { removeFromCompareList(this.dataset.id); });
     } else {
-        compareButton.innerText = "Сравнить";
+        compareButton.innerText = (comparePhrases) ? comparePhraseAdd : compareButton.innerText;
         compareButton.dataset.action = "addToCompareList";
-        compareButton.classList.remove("compareButton_active");
-
+        compareButton.classList.remove(compareActiveClass);
+        
         compareButton.addEventListener("click", function() { addToCompareList(this.dataset.id); });
     }
 }
@@ -133,11 +133,11 @@ function getCompareList() {
     if (document.cookie.indexOf("compare_list") === -1) {
         return [];
     }
-
+    
     // Extract the comparison list from the cookie
     const compareListCookie = document.cookie.split(";").find(cookie => cookie.trim().startsWith("compare_list="));
     const compareList = compareListCookie.split("=")[1].split(",");
-
+    
     return compareList;
 }
 
@@ -146,7 +146,7 @@ function updateCompareListCookie(compareList) {
     if (compareList.length > 0) {
         // Convert the comparison list array into a string
         const compareListString = compareList.join(",");
-
+        
         // Set the cookie with the updated comparison list
         document.cookie = `compare_list=${compareListString};max-age=31536000;path=/`;
     } else {
@@ -166,7 +166,7 @@ function renderCompareTable() {
     if (!tableWrapper) {
         return;
     }
-
+    
     const compareList = getCompareList();
     if (compareList.length !== 0) {
         fetch("/compare-list-render", {
@@ -179,7 +179,7 @@ function renderCompareTable() {
         .then(response => response.text())
         .then(html => {
             tableWrapper.innerHTML = html;
-
+            
             setAllCompareButtonsState();
             setAllCompareButtonsListeners();
         })
@@ -192,7 +192,7 @@ function clearCompareData() {
     // Clear comparison "compare_list" cookies and clear HTML in comparison table    
     const compareList = [];
     updateCompareListCookie(compareList);
-
+    
     renderCompareCount();
     renderCompareTable();
 }
@@ -201,13 +201,21 @@ function renderCompareCount() {
     // Get the current comparison list from the cookie
     const compareList = getCompareList(); 
     const count = compareList.length;
-
+    
     const compareCountWrap = document.querySelector('[data-role="compareCountWrap"]');
     const compareCount = document.querySelector('[data-role="compareCount"]');
-
-    if (compareCountWrap) {
-        compareCount.innerHTML = count ? count : '';
-        compareCountWrap.classList.add("compareCountWrap_active");
-        compareCount.classList.add("compareCount_active");
-    }
+    
+    if (!compareCountWrap) {
+        return;
+    }    
+    
+    if (count > 0) {
+        compareCount.innerHTML = count;
+        compareCountWrap.classList.add(compareActiveClass);
+        compareCount.classList.add(compareActiveClass);
+    } else {
+        compareCount.innerHTML = '';
+        compareCountWrap.classList.remove(compareActiveClass);
+        compareCount.classList.remove(compareActiveClass);
+    }  
 }
