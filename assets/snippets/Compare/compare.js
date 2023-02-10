@@ -1,5 +1,3 @@
-maxCount = 5;
-
 renderCompareTable();
 renderCompareCount();
 setAllCompareButtonsState();
@@ -24,7 +22,7 @@ function addToCompareList(productId) {
     // Check if the product is already in the comparison list
     if (!compareList.includes(productId)) {
         // Check if the comparison list has reached its limit
-        if (compareList.length >= maxCount) {
+        if (compareList.length >= compareMaxCount) {
             showCompareListLimitWarning();
             return;
         }
@@ -159,7 +157,7 @@ function updateCompareListCookie(compareList) {
 
 
 function showCompareListLimitWarning() {
-    alert(`You can only compare up to ${maxCount} products at a time. Please remove a product from the comparison list to add a new one.`);
+    alert(compareMaxCountMsg);
 }
 
 
