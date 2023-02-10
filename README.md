@@ -59,5 +59,5 @@ JS-файл нужно подключить по ссылке без разни�
 
 #### Пример тега очистки
 ```
-<div class="btn btn-danger btn-md" data-role="compareButton" data-action="clearCompareData">Очистить сравнение</div>
+<div class="btn btn-danger btn-md" data-role="compareClearButton">Очистить сравнение</div>
 ```
