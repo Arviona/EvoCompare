@@ -29,14 +29,14 @@ Compare/
 
 #### Пример для каталога (шаблон ДокЛистер)
 ```
-<span class="btn btn_sm btn_compare" data-role="compareButton" data-action="addToCompareList" data-id="[+id+]">
+<span class="btn btn_sm" data-role="compareButton" data-action="addToCompareList" data-id="[+id+]">
    Сравнить
 </span>
 ```
 
 #### Другой пример (для Страницы товара, поэтому `[*id*]` вместо `[+id+]`)
 ```
-<div class="btn btn_lg btn_compare" data-role="compareButton" data-action="addToCompareList" data-id="[*id*]">
+<div class="btn btn_lg" data-role="compareButton" data-action="addToCompareList" data-id="[*id*]">
    Сравнить
 </div>
 ```
