@@ -19,8 +19,15 @@ if($modx->event->name==='OnPageNotFound') {
         die();
     }
 } elseif($modx->event->name==='OnWebPageInit') {
-    // Load Scripts and compareMaxCount value
-    $modx->regClientScript('<script>const compareMaxCount = '.$compareMaxCount.';</script>');
-    $modx->regClientScript('<script>const compareMaxCountMsg = "'.$compareMaxCountMsg['ru'].'";</script>');
+    // Load Scripts and JS constants values
+    $jsConst = "const compareMaxCount = {$compareMaxCount};".PHP_EOL;
+    $jsConst .= 'const compareMaxCountMsg = "'.$compareMaxCountMsg['ru'].'";'.PHP_EOL;
+    $jsConst .= "const comparePhrases = {$comparePhrases};".PHP_EOL;
+    $jsConst .= 'const comparePhraseAdd = "'.$comparePhraseAdd.'";'.PHP_EOL;
+    $jsConst .= 'const comparePhraseRemove = "'.$comparePhraseRemove.'";'.PHP_EOL;
+    $jsConst .= 'const compareActiveClass = "'.$compareActiveClass.'";'.PHP_EOL;
+
+
+    $modx->regClientScript('<script>'.$jsConst.'</script>');
     $modx->regClientScript('assets/snippets/Compare/compare.js');
 }
