@@ -12,4 +12,4 @@
  * @internal    @disabled 0
 **/
 
-require MODX_BASE_PATH.'assets/components/Compare/plugin.compare.php';
+require MODX_BASE_PATH.'assets/snippets/Compare/plugin.compare.php';
