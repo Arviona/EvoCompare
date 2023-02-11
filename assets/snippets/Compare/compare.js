@@ -4,18 +4,17 @@ setAllCompareButtonsState();
 
 const compareClearButton = document.querySelector('[data-role="compareClearButton"]');
 if (compareClearButton) {
-    compareClearButton.addEventListener("click", function() {
-        clearCompareData();
-    });
+    compareClearButton.addEventListener("click", clearCompareData);
 }
 
 function afterFilterComplete() {
     setAllCompareButtonsState();
 }
 
-function addToCompareList(productId) {
+function addToCompareList() {
     // Get the current comparison list from the cookie
     const compareList = getCompareList();
+    const productId = this.dataset.id;
 
     // Check if the product is already in the comparison list
     if (!compareList.includes(productId)) {
@@ -30,15 +29,16 @@ function addToCompareList(productId) {
         updateCompareListCookie(compareList);
 
         // Update the button text and class
-        updateCompareButtonState(productId);
+        updateCompareButtonState(this);
 
         renderCompareCount();
     }
 }
 
-function removeFromCompareList(productId) {
+function removeFromCompareList() {
     // Get the current comparison list from the cookie
     const compareList = getCompareList();
+    const productId = this.dataset.id;
 
     // Check if the product is in the comparison list
     if (compareList.includes(productId)) {
@@ -48,12 +48,61 @@ function removeFromCompareList(productId) {
         updateCompareListCookie(compareList);
 
         // Update the button text and class
-        updateCompareButtonState(productId);
+        updateCompareButtonState(this);
 
         // Update comparison table
         renderCompareTable();
 
         renderCompareCount();
+    }
+}
+
+function getCompareList() {
+    // Check if the cookie exists
+    if (document.cookie.indexOf("compare_list") === -1) {
+        return [];
+    }
+
+    // Extract the comparison list from the cookie
+    const compareListCookie = document.cookie.split(";").find(cookie => cookie.trim().startsWith("compare_list="));
+    const compareList = compareListCookie.split("=")[1].split(",");
+
+    return compareList;
+}
+
+function showCompareListLimitWarning() {
+    alert(compareMaxCountMsg);
+}
+
+function updateCompareListCookie(compareList) {
+    if (compareList.length > 0) {
+        // Convert the comparison list array into a string
+        const compareListString = compareList.join(",");
+
+        // Set the cookie with the updated comparison list
+        document.cookie = `compare_list=${compareListString};max-age=31536000;path=/`;
+    } else {
+        // Delete cookie
+        document.cookie = "compare_list=;max-age=-1;path=/";
+    }
+}
+
+function updateCompareButtonState(el) {
+    // Get the current comparison list from the cookie
+    const compareList = getCompareList();
+    const productId = el.dataset.id;
+
+    // Check if the product is in the comparison list
+    if (compareList.includes(productId)) {
+        el.removeEventListener("click", addToCompareList);
+        el.addEventListener("click", removeFromCompareList);
+        el.dataset.action = "removeFromCompareList";
+        el.classList.add(compareActiveClass);
+    } else {
+        el.removeEventListener("click", removeFromCompareList);
+        el.addEventListener("click", addToCompareList);
+        el.dataset.action = "addToCompareList";
+        el.classList.remove(compareActiveClass);
     }
 }
 
@@ -72,70 +121,16 @@ function setAllCompareButtonsState() {
         if (compareList.includes(compareButton.dataset.id)) {
             compareButton.dataset.action = "removeFromCompareList";
             compareButton.classList.add(compareActiveClass);
-            compareButton.addEventListener("click", function() { removeFromCompareList(this.dataset.id); });
+            compareButton.removeEventListener("click", addToCompareList);
+            compareButton.addEventListener("click", removeFromCompareList);
         } else {
             compareButton.dataset.action = "addToCompareList";
             compareButton.classList.remove(compareActiveClass);
-            compareButton.addEventListener("click", function() { addToCompareList(this.dataset.id); });
+            compareButton.removeEventListener("click", removeFromCompareList);
+            compareButton.addEventListener("click", addToCompareList);
         }
     });
 }
-
-function updateCompareButtonState(productId) {
-    // Find the corresponding compare button for the product
-    const compareButton = document.querySelector(`[data-id='${productId}']`);
-    if (!compareButton) {
-        return;
-    }
-
-    // Get the current comparison list from the cookie
-    const compareList = getCompareList();
-
-    // Check if the product is in the comparison list
-    if (compareList.includes(productId)) {
-        compareButton.addEventListener("click", function() { removeFromCompareList(productId); });
-        compareButton.dataset.action = "removeFromCompareList";
-        compareButton.classList.add(compareActiveClass);       
-    } else {
-        compareButton.addEventListener("click", function() { addToCompareList(productId); });
-        compareButton.dataset.action = "addToCompareList";
-        compareButton.classList.remove(compareActiveClass);        
-    }
-}
-
-
-function getCompareList() {
-    // Check if the cookie exists
-    if (document.cookie.indexOf("compare_list") === -1) {
-        return [];
-    }
-
-    // Extract the comparison list from the cookie
-    const compareListCookie = document.cookie.split(";").find(cookie => cookie.trim().startsWith("compare_list="));
-    const compareList = compareListCookie.split("=")[1].split(",");
-
-    return compareList;
-}
-
-
-function updateCompareListCookie(compareList) {
-    if (compareList.length > 0) {
-        // Convert the comparison list array into a string
-        const compareListString = compareList.join(",");
-
-        // Set the cookie with the updated comparison list
-        document.cookie = `compare_list=${compareListString};max-age=31536000;path=/`;
-    } else {
-        // Delete cookie
-        document.cookie = "compare_list=;max-age=-1;path=/";
-    }
-}
-
-
-function showCompareListLimitWarning() {
-    alert(compareMaxCountMsg);
-}
-
 
 function renderCompareTable() {
     const tableWrapper = document.querySelector('[data-role="compareTable"]');
@@ -156,7 +151,7 @@ function renderCompareTable() {
         .then(html => {
             tableWrapper.innerHTML = html;
             setAllCompareButtonsState();
-         })
+        })
     } else {
         tableWrapper.innerHTML = '';
     }
@@ -170,7 +165,7 @@ function clearCompareData() {
     renderCompareCount();
     renderCompareTable();
     setAllCompareButtonsState();
- }
+}
 
 function renderCompareCount() {
     // Get the current comparison list from the cookie
