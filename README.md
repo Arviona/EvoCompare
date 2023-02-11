@@ -27,7 +27,7 @@ Compare/
 
 Но должны быть три обязательных атрибута: `data-role="compareButton"`, `data-action="addToCompareList"` и data-id со значением ИД товара, например `data-id="[+id+]"`
 
-#### Пример (шаблон для ДокЛистер)
+#### Пример кнопки (шаблон для ДокЛистер)
 ```
 <span data-role="compareButton" data-action="addToCompareList" data-id="[+id+]">
     <i class="fas fa-chart-bar"></i>
@@ -37,7 +37,7 @@ Compare/
 
 Если нужна кнопка с текстом, то можно добавить текст, и потом управлять видимостью через CSS.
 
-#### Пример с текстом
+#### Пример кнопки с текстом
 ```
 <span data-role="compareButton" data-action="addToCompareList" data-id="[+id+]">
     <i class="fas fa-chart-bar"></i>
