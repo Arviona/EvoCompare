@@ -27,20 +27,12 @@ Compare/
 
 Но должны быть три обязательных атрибута: `data-role="compareButton"`, `data-action="addToCompareList"` и data-id со значением ИД товара, например `data-id="[+id+]"`
 
-#### Пример для каталога (шаблон ДокЛистер)
+#### Пример (шаблон для ДокЛистер)
 ```
-<span class="btn btn_sm" data-role="compareButton" data-action="addToCompareList" data-id="[+id+]">
-   Сравнить
+<span data-role="compareButton" data-action="addToCompareList" data-id="[+id+]">
+    <i class="fas fa-chart-bar"></i>
 </span>
 ```
-
-#### Другой пример (для Страницы товара, поэтому `[*id*]` вместо `[+id+]`)
-```
-<div class="btn btn_lg" data-role="compareButton" data-action="addToCompareList" data-id="[*id*]">
-   Сравнить
-</div>
-```
-
 Когда товар добавлен к сравнению, у элемента появляется класс активности, по дефолту `active`, он предназначен для оформления. В параметрах можно задать другой класс активности.
 
 ### 3. Таблица сравнения
