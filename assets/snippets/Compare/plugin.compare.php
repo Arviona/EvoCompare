@@ -22,9 +22,6 @@ if($modx->event->name==='OnPageNotFound') {
     // Load Scripts and JS constants values
     $jsConst = "const compareMaxCount = {$compareMaxCount};".PHP_EOL;
     $jsConst .= 'const compareMaxCountMsg = "'.$compareMaxCountMsg['ru'].'";'.PHP_EOL;
-    $jsConst .= "const comparePhrases = {$comparePhrases};".PHP_EOL;
-    $jsConst .= 'const comparePhraseAdd = "'.$comparePhraseAdd.'";'.PHP_EOL;
-    $jsConst .= 'const comparePhraseRemove = "'.$comparePhraseRemove.'";'.PHP_EOL;
     $jsConst .= 'const compareActiveClass = "'.$compareActiveClass.'";'.PHP_EOL;
 
 
