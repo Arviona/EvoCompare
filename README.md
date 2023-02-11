@@ -35,17 +35,10 @@ Compare/
 ```
 Когда товар добавлен к сравнению, у элемента появляется класс активности, по дефолту `active`, он предназначен для оформления. В параметрах можно задать другой класс активности.
 
-Если нужна кнопка с текстом, то можно добавить текст, и потом делать видимость через CSS.
+Если нужна кнопка с текстом, то можно добавить текст, и потом управлять видимостью через CSS.
 
 #### Пример с текстом
 ```
-<style>
-    .add { display: inline; }
-    .remove { display: none; }    
-    .active > .add { display: none; }
-    .active > .remove { display: inline; }
-</style>
-
 <span data-role="compareButton" data-action="addToCompareList" data-id="[+id+]">
     <i class="fas fa-chart-bar"></i>
     <span class="add">Сравнить</span>
